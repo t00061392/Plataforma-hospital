@@ -85,21 +85,26 @@ def opcion1():
 
 def opcion2():
     tarjet = 0
+    flag=False
     clear()
     estampa()
-    documento = input("Ingrese el documento del paciente: ")
-    with open("pacientes.csv", 'r') as archivo:
-        lectura = csv.reader(archivo)
-        datos = list(lectura)
-        for i in range(len(datos)):
-            if datos[i][3] == documento:
-                tarjet = i
-        print(f"Nombre: {datos[tarjet][0]}\nSexo: {datos[tarjet][1]}\nFecha de nacimiento: {datos[tarjet][2]}"
+    while flag!=True:
+       documento = input("Ingrese el documento del paciente: ")
+       with open("pacientes.csv", 'r') as archivo:
+            lectura = csv.reader(archivo)
+            datos = list(lectura)
+            for i in range(len(datos)):
+               if datos[i][3] == documento:
+                  tarjet = i
+                  flag=True
+                  print(f"Nombre: {datos[tarjet][0]}\nSexo: {datos[tarjet][1]}\nFecha de nacimiento: {datos[tarjet][2]}"
               f"\nDocumento: {datos[tarjet][3]}\nPresión(mmHg): {datos[tarjet][4]}\nTemperatura(c°): "
               f"{datos[tarjet][5]}\nSaturación(%): {datos[tarjet][6]}\nFrecuencia cardiaca(lat/min): "
               f"{datos[tarjet][7]}\nNotas: {datos[tarjet][8]}\nCamilla: {datos[tarjet][9]}\nNúmero de camilla: "
               f"{datos[tarjet][10]}\nMedicamento: {datos[tarjet][11]}\nEsta en alta: {datos[tarjet][12]}")
-
+            if flag is False:
+                print("El documento no está registrado")
+                menu()
 
 def opcion3():
     tarjet = 0
@@ -131,6 +136,8 @@ def opcion3():
                         pass
             if flag is False:
                 print("El documento no está registrado")
+                menu()
+                
 
 
 def opcion4():
